@@ -1,3 +1,4 @@
+// components/HeroModal.tsx (Document 12)
 "use client";
 
 import { useState, useEffect } from "react";
@@ -34,7 +35,7 @@ export default function HeroModal({ isOpen, onClose, onSuccess, mode, initialDat
       });
       setImagePreview(
         initialData.image 
-          ? (initialData.image.startsWith('http') ? initialData.image : `http://localhost:8000/storage/${initialData.image}`) 
+          ? (initialData.image.startsWith('http') ? initialData.image : `${process.env.NEXT_PUBLIC_STORAGE_URL}/storage/${initialData.image}`) 
           : null
       );
     } else {
@@ -83,8 +84,8 @@ export default function HeroModal({ isOpen, onClose, onSuccess, mode, initialDat
     try {
       // ENDPOINT SUDAH DIUBAH KE /api/sliders
       const url = mode === "add"
-        ? "http://localhost:8000/api/sliders"
-        : `http://localhost:8000/api/sliders/${initialData?.id}`;
+        ? `${process.env.NEXT_PUBLIC_API_URL}/sliders`
+        : `${process.env.NEXT_PUBLIC_API_URL}/sliders/${initialData?.id}`;
 
       const res = await fetch(url, {
         method: "POST", 

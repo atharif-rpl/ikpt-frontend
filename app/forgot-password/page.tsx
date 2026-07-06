@@ -1,3 +1,4 @@
+// ForgotPasswordPage.tsx (Document 14)
 "use client"
 
 import { useState } from "react"
@@ -21,7 +22,7 @@ export default function ForgotPasswordPage() {
     setMessage(null)
 
     try {
-      const res = await fetch("http://localhost:8000/api/forgot-password", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/forgot-password`, {
         method: "POST",
         headers: {
           "Accept": "application/json",
@@ -52,7 +53,7 @@ export default function ForgotPasswordPage() {
     setMessage(null)
 
     try {
-      const res = await fetch("http://localhost:8000/api/reset-password", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reset-password`, {
         method: "POST",
         headers: {
           "Accept": "application/json",

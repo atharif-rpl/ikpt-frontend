@@ -1,3 +1,4 @@
+// SidebarWrapper.tsx (Document 13)
 "use client"
 
 import { usePathname, useRouter } from "next/navigation"
@@ -46,7 +47,7 @@ export default function SidebarWrapper({ children }: { children: React.ReactNode
     if (!token) return
 
     try {
-      await fetch("http://localhost:8000/api/logout", {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/logout`, {
         method: "POST",
         headers: {
           "Accept": "application/json",

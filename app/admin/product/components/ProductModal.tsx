@@ -1,3 +1,4 @@
+// components/ProductModal.tsx (Document 6)
 "use client";
 
 import { useState, useEffect } from "react";
@@ -42,8 +43,7 @@ export default function ProductModal({ isOpen, onClose, onSuccess, mode, initial
         description: initialData.description || "",
         specs: initialData.specs || "",
       });
-      setImagePreview(initialData.image ? `http://localhost:8000/storage/${initialData.image}` : null);
-    } else {
+      setImagePreview(initialData.image ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/storage/${initialData.image}` : null);
       setFormData({ name: "", category: "", description: "", specs: "" });
       setImagePreview(null);
     }
@@ -79,8 +79,8 @@ export default function ProductModal({ isOpen, onClose, onSuccess, mode, initial
 
     try {
       const url = mode === "add"
-        ? "http://localhost:8000/api/products"
-        : `http://localhost:8000/api/products/${initialData?.id}`;
+        ? `${process.env.NEXT_PUBLIC_API_URL}/products`
+        : `${process.env.NEXT_PUBLIC_API_URL}/products/${initialData?.id}`;
 
       const res = await fetch(url, {
         method: "POST",

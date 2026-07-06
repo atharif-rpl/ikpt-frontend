@@ -1,3 +1,4 @@
+// GlobalSettingsPage.tsx (Document 9)
 "use client";
 
 import { useState, useEffect } from "react";
@@ -50,7 +51,7 @@ export default function GlobalSettingsPage() {
     const fetchSettings = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:8000/api/settings", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/settings`, {
           headers: {
             "Accept": "application/json",
             "Authorization": `Bearer ${token}`
@@ -77,7 +78,7 @@ export default function GlobalSettingsPage() {
 
           // Set preview gambar lama dari database kalau ada
           if (data.about_image) {
-            setAboutImagePreview(`http://localhost:8000/storage/${data.about_image}`);
+            setAboutImagePreview(`${process.env.NEXT_PUBLIC_STORAGE_URL}/storage/${data.about_image}`);
           }
         }
       } catch (err) {
@@ -137,7 +138,7 @@ export default function GlobalSettingsPage() {
     try {
       const token = localStorage.getItem("token");
       // Masih pake POST ke endpoint storeLaravel yang pake updateOrCreate id:1
-      const res = await fetch("http://localhost:8000/api/settings", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/settings`, {
         method: "POST", 
         headers: {
           "Accept": "application/json",

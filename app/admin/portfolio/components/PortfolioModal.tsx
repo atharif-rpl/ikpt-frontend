@@ -1,3 +1,4 @@
+// components/PortfolioModal.tsx (Document 4)
 "use client";
 
 import { useState, useEffect } from "react";
@@ -99,8 +100,8 @@ export default function PortfolioModal({ isOpen, onClose, onSuccess, mode, initi
 
     try {
       const url = mode === "add"
-        ? "http://localhost:8000/api/portfolios"
-        : `http://localhost:8000/api/portfolios/${initialData?.id}`;
+        ? `${process.env.NEXT_PUBLIC_API_URL}/portfolios`
+        : `${process.env.NEXT_PUBLIC_API_URL}/portfolios/${initialData?.id}`;
 
       const res = await fetch(url, {
         method: "POST", 

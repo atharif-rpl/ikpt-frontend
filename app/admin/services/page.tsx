@@ -1,3 +1,4 @@
+// ManageServicesPage.tsx (Document 7)
 "use client";
 
 import { useEffect, useState } from "react";
@@ -27,7 +28,7 @@ export default function ManageServicesPage() {
     setIsLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:8000/api/services", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/services`, {
         method: "GET",
         headers: { 
           "Accept": "application/json",
@@ -85,7 +86,7 @@ export default function ManageServicesPage() {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch(`http://localhost:8000/api/services/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/services/${id}`, {
         method: "DELETE",
         headers: { 
           "Accept": "application/json",
@@ -152,12 +153,12 @@ export default function ManageServicesPage() {
                       <td className="py-5 px-6">
                         <div className="w-14 h-14 rounded-xl bg-gray-100 dark:bg-black/40 border border-black/5 dark:border-white/10 overflow-hidden shrink-0 flex items-center justify-center p-2">
                           {item.icon ? (
-                            <img 
-                              src={item.icon.startsWith('http') ? item.icon : `http://localhost:8000/storage/${item.icon}`} 
-                              alt={item.title} 
-                              className="w-full h-full object-contain" 
-                              onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/100x100/EEE/31343C?font=Montserrat&text=Icon' }}
-                            />
+                          <img 
+                          src={item.icon.startsWith('http') ? item.icon : `${process.env.NEXT_PUBLIC_STORAGE_URL}/${item.icon}`}
+                          alt={item.title} 
+                          className="w-full h-full object-cover"
+                          onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/100x100/EEE/31343C?font=Montserrat&text=Icon' }}
+                        />
                           ) : (
                             <ImageIcon className="w-6 h-6 text-gray-400" />
                           )}

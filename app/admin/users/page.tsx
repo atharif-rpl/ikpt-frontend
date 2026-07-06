@@ -24,7 +24,7 @@ export default function UserManagementPage() {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem("token")
-      const res = await fetch("http://localhost:8000/api/users", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
         headers: { "Accept": "application/json", "Authorization": `Bearer ${token}` }
       })
       const result = await res.json()
@@ -78,7 +78,7 @@ export default function UserManagementPage() {
     setMessage(null)
 
     const token = localStorage.getItem("token")
-    const url = editingId ? `http://localhost:8000/api/users/${editingId}` : "http://localhost:8000/api/users"
+    const url = editingId ? `${process.env.NEXT_PUBLIC_API_URL}/users/${editingId}` : `${process.env.NEXT_PUBLIC_API_URL}/users`
     const method = editingId ? "PUT" : "POST"
 
     try {
@@ -114,7 +114,7 @@ export default function UserManagementPage() {
 
     const token = localStorage.getItem("token")
     try {
-      const response = await fetch(`http://localhost:8000/api/users/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`, {
         method: "DELETE",
         headers: { "Accept": "application/json", "Authorization": `Bearer ${token}` }
       })
@@ -150,7 +150,7 @@ export default function UserManagementPage() {
         </div>
       )}
 
-      {/* FORM SECTION (Grid Layout biar elegan) */}
+      {/* FORM SECTION */}
       <div className="bg-white dark:bg-[#121212] border border-black/5 dark:border-white/5 p-8 rounded-[32px] shadow-sm relative overflow-hidden">
         <h2 className="text-xl font-black mb-6">{editingId ? "Ubah Data Pengguna" : "Daftarkan Pengguna Baru"}</h2>
         

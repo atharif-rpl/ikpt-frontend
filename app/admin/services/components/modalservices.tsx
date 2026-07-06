@@ -1,3 +1,4 @@
+// components/modalservices.tsx (Document 8)
 "use client";
 
 import { useState, useEffect } from "react";
@@ -41,7 +42,7 @@ export default function ModalServices({ isOpen, onClose, onSuccess, mode, initia
       });
       setIconPreview(
         initialData.icon 
-          ? (initialData.icon.startsWith('http') ? initialData.icon : `http://localhost:8000/storage/${initialData.icon}`) 
+          ? (initialData.icon.startsWith('http') ? initialData.icon : `${process.env.NEXT_PUBLIC_STORAGE_URL}/storage/${initialData.icon}`) 
           : null
       );
     } else {
@@ -85,8 +86,8 @@ export default function ModalServices({ isOpen, onClose, onSuccess, mode, initia
 
     try {
       const url = mode === "add"
-        ? "http://localhost:8000/api/services"
-        : `http://localhost:8000/api/services/${initialData?.id}`;
+        ? `${process.env.NEXT_PUBLIC_API_URL}/services`
+        : `${process.env.NEXT_PUBLIC_API_URL}/services/${initialData?.id}`;
 
       const res = await fetch(url, {
         method: "POST", 

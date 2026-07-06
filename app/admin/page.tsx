@@ -39,9 +39,9 @@ export default function DashboardOverview() {
         const headers = { "Accept": "application/json", "Authorization": `Bearer ${token}` }
 
         const [portRes, certRes, visitorRes] = await Promise.all([
-          fetch("http://localhost:8000/api/portfolios", { headers }).then(r => r.json()),
-          fetch("http://localhost:8000/api/certificates", { headers }).then(r => r.json()),
-          fetch("http://localhost:8000/api/visitor-stats", { headers }).then(r => r.json())
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/portfolios`, { headers }).then(r => r.json()),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/certificates`, { headers }).then(r => r.json()),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/visitor-stats`, { headers }).then(r => r.json())
         ])
 
         const portfolios = portRes.status === "success" ? portRes.data : []

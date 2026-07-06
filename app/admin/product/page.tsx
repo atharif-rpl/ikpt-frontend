@@ -1,3 +1,4 @@
+// ProductListPage.tsx (Document 5)
 "use client";
 
 import { useEffect, useState } from "react";
@@ -31,7 +32,7 @@ export default function ProductListPage() {
     setIsLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:8000/api/products", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
         method: "GET",
         headers: { 
           "Accept": "application/json",
@@ -108,7 +109,7 @@ export default function ProductListPage() {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch(`http://localhost:8000/api/products/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${id}`, {
         method: "DELETE",
         headers: { "Accept": "application/json", "Authorization": `Bearer ${token}` }
       });
@@ -197,12 +198,11 @@ export default function ProductListPage() {
                         <div className="flex items-center gap-4">
                           <div className="w-16 h-16 rounded-xl bg-gray-100 dark:bg-black/40 border border-black/5 dark:border-white/10 overflow-hidden shrink-0 flex items-center justify-center">
                             {item.image ? (
-                              <img 
-                                src={item.image.startsWith('http') ? item.image : `http://localhost:8000/storage/${item.image}`} 
-                                alt={item.name} 
-                                className="w-full h-full object-cover"
-                                onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/100x100/EEE/31343C?font=Montserrat&text=No+Image' }}
-                              />
+                             <img 
+                             src={item.image.startsWith('http') ? item.image : `${process.env.NEXT_PUBLIC_STORAGE_URL}/${item.image}`}
+                             className="w-full h-full object-cover"
+                             onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/100x100/EEE/31343C?font=Montserrat&text=No+Image' }}
+                           />
                             ) : (
                               <ImageIcon className="w-6 h-6 text-gray-400" />
                             )}

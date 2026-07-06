@@ -26,7 +26,7 @@ export default function CertificateListPage() {
     setIsLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:8000/api/certificates", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/certificates`, {
         method: "GET",
         headers: { 
           "Accept": "application/json",
@@ -85,7 +85,7 @@ export default function CertificateListPage() {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch(`http://localhost:8000/api/certificates/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/certificates/${id}`, {
         method: "DELETE",
         headers: { "Accept": "application/json", "Authorization": `Bearer ${token}` }
       });
@@ -148,12 +148,12 @@ export default function CertificateListPage() {
                       <td className="py-5 px-6">
                         <div className="w-20 h-14 rounded-xl bg-gray-100 dark:bg-black/40 border border-black/5 dark:border-white/10 overflow-hidden shrink-0 flex items-center justify-center">
                           {item.image ? (
-                            <img 
-                              src={item.image.startsWith('http') ? item.image : `http://localhost:8000/storage/${item.image}`} 
-                              alt={item.name} 
-                              className="w-full h-full object-contain p-1" 
-                              onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/100x60/EEE/31343C?font=Montserrat&text=No+Image' }}
-                            />
+                           <img 
+                           src={item.image.startsWith('http') ? item.image : `${process.env.NEXT_PUBLIC_STORAGE_URL}/storage/${item.image}`} 
+                           alt={item.name} 
+                           className="w-full h-full object-contain p-1" 
+                           onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/100x60/EEE/31343C?font=Montserrat&text=No+Image' }}
+                         />
                           ) : (
                             <ImageIcon className="w-6 h-6 text-gray-400" />
                           )}

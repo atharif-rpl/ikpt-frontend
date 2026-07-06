@@ -1,3 +1,4 @@
+// components/ModalCertificate.tsx (Document 2)
 "use client";
 
 import { useState, useEffect } from "react";
@@ -36,7 +37,7 @@ export default function ModalCertificate({ isOpen, onClose, onSuccess, mode, ini
         name: initialData.name,
         issued_by: initialData.issued_by,
       });
-      setImagePreview(initialData.image ? `http://localhost:8000/storage/${initialData.image}` : null);
+      setImagePreview(initialData.image ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/storage/${initialData.image}` : null);
     } else {
       setFormData({ name: "", issued_by: "" });
       setImagePreview(null);
@@ -84,8 +85,8 @@ export default function ModalCertificate({ isOpen, onClose, onSuccess, mode, ini
 
     try {
       const url = mode === "add"
-        ? "http://localhost:8000/api/certificates"
-        : `http://localhost:8000/api/certificates/${initialData?.id}`;
+        ? `${process.env.NEXT_PUBLIC_API_URL}/certificates`
+        : `${process.env.NEXT_PUBLIC_API_URL}/certificates/${initialData?.id}`;
 
       const res = await fetch(url, {
         method: "POST", // Tetap POST biar _method="PUT" di form data terbaca

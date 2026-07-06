@@ -1,3 +1,4 @@
+// LoginPage.tsx (Document 15)
 "use client"
 
 import { useState } from "react"
@@ -24,7 +25,7 @@ export default function LoginPage() {
     setError(null)
 
     try {
-      const res = await fetch("http://localhost:8000/api/login", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
         method: "POST",
         headers: {
           "Accept": "application/json",

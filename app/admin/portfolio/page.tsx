@@ -1,3 +1,4 @@
+// PortfolioListPage.tsx (Document 3)
 "use client";
 
 import { useEffect, useState } from "react";
@@ -36,7 +37,7 @@ export default function PortfolioListPage() {
     setIsLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:8000/api/portfolios", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/portfolios`, {
         method: "GET",
         headers: { 
           "Accept": "application/json",
@@ -94,7 +95,7 @@ export default function PortfolioListPage() {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch(`http://localhost:8000/api/portfolios/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/portfolios/${id}`, {
         method: "DELETE",
         headers: { "Accept": "application/json", "Authorization": `Bearer ${token}` }
       });
@@ -216,13 +217,13 @@ export default function PortfolioListPage() {
                         <div className="flex items-center gap-4">
                           <div className="w-20 h-14 rounded-xl bg-gray-100 dark:bg-black/40 border border-black/5 dark:border-white/10 overflow-hidden shrink-0 flex items-center justify-center">
                             {item.image ? (
-                              <img 
-                                // INI FIX-NYA: Cek apakah item.image udah ada http-nya. Kalau ada, pakai langsung.
-                                src={item.image.startsWith('http') ? item.image : `http://localhost:8000/storage/${item.image}`} 
-                                alt={item.title} 
-                                className="w-full h-full object-cover"
-                                onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/100x60/EEE/31343C?font=Montserrat&text=No+Image' }}
-                              />
+                             <img 
+                             // INI FIX-NYA: Cek apakah item.image udah ada http-nya. Kalau ada, pakai langsung.
+                             src={item.image.startsWith('http') ? item.image : `${process.env.NEXT_PUBLIC_STORAGE_URL}/${item.image}`}
+                             alt={item.title} 
+                             className="w-full h-full object-cover"
+                             onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/100x60/EEE/31343C?font=Montserrat&text=No+Image' }}
+                           />
                             ) : (
                               <ImageIcon className="w-6 h-6 text-gray-400" />
                             )}

@@ -1,3 +1,4 @@
+// HeroManagementPage.tsx (Document 10)
 "use client";
 
 import { useEffect, useState } from "react";
@@ -25,7 +26,7 @@ export default function HeroManagementPage() {
     setIsLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:8000/api/sliders", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/sliders`, {
         method: "GET",
         headers: { 
           "Accept": "application/json",
@@ -83,7 +84,7 @@ export default function HeroManagementPage() {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch(`http://localhost:8000/api/sliders/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/sliders/${id}`, {
         method: "DELETE",
         headers: { 
           "Accept": "application/json",
@@ -149,11 +150,11 @@ export default function HeroManagementPage() {
                         <div className="w-28 h-16 rounded-xl bg-gray-100 dark:bg-black/40 border border-black/5 dark:border-white/10 overflow-hidden shrink-0 flex items-center justify-center">
                           {item.image ? (
                             <img 
-                              src={item.image.startsWith('http') ? item.image : `http://localhost:8000/storage/${item.image}`} 
-                              alt={item.title} 
-                              className="w-full h-full object-cover" 
-                              onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/120x60/EEE/31343C?font=Montserrat&text=No+Image' }}
-                            />
+                            src={item.image.startsWith('http') ? item.image : `${process.env.NEXT_PUBLIC_STORAGE_URL}/${item.image}`}
+                            alt={item.title} 
+                            className="w-full h-full object-cover" 
+                            onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/120x60/EEE/31343C?font=Montserrat&text=No+Image' }}
+                          />
                           ) : (
                             <ImageIcon className="w-6 h-6 text-gray-400" />
                           )}
