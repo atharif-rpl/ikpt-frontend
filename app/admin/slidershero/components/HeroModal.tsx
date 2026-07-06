@@ -35,7 +35,7 @@ export default function HeroModal({ isOpen, onClose, onSuccess, mode, initialDat
       });
       setImagePreview(
         initialData.image 
-          ? (initialData.image.startsWith('http') ? initialData.image : `${process.env.NEXT_PUBLIC_STORAGE_URL}/storage/${initialData.image}`) 
+          ? (initialData.image.startsWith('http') ? initialData.image : `${process.env.NEXT_PUBLIC_STORAGE_URL}/${initialData.image}`) 
           : null
       );
     } else {

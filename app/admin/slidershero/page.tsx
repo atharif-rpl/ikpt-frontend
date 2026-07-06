@@ -150,7 +150,7 @@ export default function HeroManagementPage() {
                         <div className="w-28 h-16 rounded-xl bg-gray-100 dark:bg-black/40 border border-black/5 dark:border-white/10 overflow-hidden shrink-0 flex items-center justify-center">
                           {item.image ? (
                             <img 
-                            src={item.image.startsWith('http') ? item.image : `${process.env.NEXT_PUBLIC_STORAGE_URL}/${item.image}`}
+                            src={item.image.startsWith('http') ? item.image : `${process.env.NEXT_PUBLIC_STORAGE_URL}/storage/${item.image}`}
                             alt={item.title} 
                             className="w-full h-full object-cover" 
                             onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/120x60/EEE/31343C?font=Montserrat&text=No+Image' }}
