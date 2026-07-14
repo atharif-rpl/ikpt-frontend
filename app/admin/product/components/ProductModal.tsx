@@ -1,4 +1,3 @@
-// components/ProductModal.tsx (Document 6)
 "use client";
 
 import { useState, useEffect } from "react";
@@ -34,9 +33,10 @@ export default function ProductModal({ isOpen, onClose, onSuccess, mode, initial
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Sync data pas modal dibuka (terutama pas mode edit)
+  // LOGIC FIX: Pisahkan secara jelas antara mode edit dan mode add
   useEffect(() => {
     if (mode === "edit" && initialData) {
+      // Isi data form kalau lagi mode Edit
       setFormData({
         name: initialData.name,
         category: initialData.category,
@@ -44,6 +44,8 @@ export default function ProductModal({ isOpen, onClose, onSuccess, mode, initial
         specs: initialData.specs || "",
       });
       setImagePreview(initialData.image ? `${process.env.NEXT_PUBLIC_STORAGE_URL}/storage/${initialData.image}` : null);
+    } else {
+      // Kosongkan form kalau lagi mode Add Baru (Jangan ditaruh di dalam blok if Edit!)
       setFormData({ name: "", category: "", description: "", specs: "" });
       setImagePreview(null);
     }
@@ -73,9 +75,10 @@ export default function ProductModal({ isOpen, onClose, onSuccess, mode, initial
       submitData.append("image", imageFile);
     }
 
-    // if (mode === "edit") {
-    //   submitData.append("_method", "PUT");
-    // }
+    // LOGIC FIX: Hapus tanda comment supaya trik spoofing PUT ini jalan buat backend
+    if (mode === "edit") {
+      submitData.append("_method", "PUT");
+    }
 
     try {
       const url = mode === "add"
@@ -83,7 +86,7 @@ export default function ProductModal({ isOpen, onClose, onSuccess, mode, initial
         : `${process.env.NEXT_PUBLIC_API_URL}/products/${initialData?.id}`;
 
       const res = await fetch(url, {
-        method: "POST",
+        method: "POST", // Harus tetap POST agar FormData + File bisa dikirim
         headers: {
           "Accept": "application/json",
           "Authorization": `Bearer ${token}`
