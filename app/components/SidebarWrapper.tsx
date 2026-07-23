@@ -4,7 +4,7 @@
 import { usePathname, useRouter } from "next/navigation"
 import Link from "next/link"
 import React, { useEffect, useState } from "react"
-import { Images } from "lucide-react"; 
+import { Images } from "lucide-react";
 
 const publicRoutes = ["/login", "/forgot-password"]
 
@@ -130,6 +130,13 @@ export default function SidebarWrapper({ children }: { children: React.ReactNode
                 <span className="text-sm font-semibold">Hero Slider</span>
               </Link>
             )}
+            <Link href="/admin/bulletin" className="flex items-center gap-3 px-4 py-2 text-gray-300 hover:bg-gray-800 rounded-lg">
+              {/* Icon (bebas lu mau pakai icon apa dari Lucide atau Heroicons) */}
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5L18.5 8H17" />
+              </svg>
+              <span>Kelola Berita</span>
+            </Link>
 
 
             {/* AREA KHUSUS SUPER ADMIN */}
